@@ -51,6 +51,10 @@ body {
   font-size: 24px;
 }
 
+#round-result::first-letter {
+  text-transform: uppercase;
+}
+
 .new-game-panel {
   width: 16%;
   position: absolute;
