@@ -17,6 +17,42 @@ var roundResult_h3 = document.getElementById("round-result");
 
 var newGame_button = document.getElementById("new-game-btn");
 
+function computerChoice() {
+  var options = ["rock", "paper", "scissors"];
+  var randomNumber = Math.floor(Math.random() * 3);
+
+  return options[randomNumber];
+}
+
+function game(playerChoiceValue) {
+  var computerChoiceValue = computerChoice();
+
+  playerChoice_img.src = "img/" + playerChoiceValue + ".svg";
+  computerChoice_img.src = "img/" + computerChoiceValue + ".svg";
+
+  switch (playerChoiceValue + " " + computerChoiceValue) {
+    case "rock scissors":
+    case "paper rock":
+    case "scissors paper":
+      roundResult_h3.innerHTML =
+        playerChoiceValue + " beats " + computerChoiceValue + "!";
+      break;
+
+    case "scissors rock":
+    case "rock paper":
+    case "paper scissors":
+      roundResult_h3.innerHTML =
+        computerChoiceValue + " beats " + playerChoiceValue + "!";
+      break;
+
+    case "rock rock":
+    case "paper paper":
+    case "scissors scissors":
+      roundResult_h3.innerHTML = "It's a draw!";
+      break;
+  }
+}
+
 function init() {
   optionRock_img.addEventListener("click", function() {
     game("rock");
@@ -31,20 +67,4 @@ function init() {
   });
 }
 
-function computerChoice() {
-  var options = ["rock", "paper", "scissors"];
-  var randomNumber = Math.floor(Math.random() * 3);
-  if (options[randomNumber] === "rock") {
-    computerChoice_img.src = "img/rock.svg";
-  } else if (options[randomNumber] === "paper") {
-    computerChoice_img.src = "img/paper.svg";
-  } else if (options[randomNumber] === "scissors") {
-    computerChoice_img.src = "img/scissors.svg";
-  }
-  return options[randomNumber];
-}
-
-function game(playerChoiceValue) {
-  var computerChoiceValue = computerChoice();
-}
 init();
