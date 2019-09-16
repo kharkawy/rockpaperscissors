@@ -34,23 +34,39 @@ function game(playerChoiceValue) {
     case "rock scissors":
     case "paper rock":
     case "scissors paper":
-      roundResult_h3.innerHTML =
-        playerChoiceValue + " beats " + computerChoiceValue + "!";
+      playerWins(playerChoiceValue, computerChoiceValue);
       break;
 
     case "scissors rock":
     case "rock paper":
     case "paper scissors":
-      roundResult_h3.innerHTML =
-        computerChoiceValue + " beats " + playerChoiceValue + "!";
+      playerLoses(playerChoiceValue, computerChoiceValue);
       break;
 
     case "rock rock":
     case "paper paper":
     case "scissors scissors":
-      roundResult_h3.innerHTML = "It's a draw!";
+      draw();
       break;
   }
+}
+
+function playerWins(player, computer) {
+  playerScore++;
+  playerScore_h2.innerHTML = playerScore;
+
+  roundResult_h3.innerHTML = player + " beats " + computer + "!";
+}
+
+function playerLoses(player, computer) {
+  computerScore++;
+  computerScore_h2.innerHTML = computerScore;
+
+  roundResult_h3.innerHTML = computer + " beats " + player + "!";
+}
+
+function draw() {
+  roundResult_h3.innerHTML = "It's a draw!";
 }
 
 function init() {
