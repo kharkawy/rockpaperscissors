@@ -1,7 +1,7 @@
 var playerScore;
 var computerScore;
 var roundNumber;
-var gamePlaying = true;
+var isGamePlaying;
 
 var playerScore_h2 = document.getElementById("player-score");
 var computerScore_h2 = document.getElementById("computer-score");
@@ -18,25 +18,50 @@ var roundResult_h3 = document.getElementById("round-result");
 
 var newGame_button = document.getElementById("new-game-btn");
 
-//Start the game - set scores and round values to 0, add event listeners that pass user's choice
-function init() {
+//Create event listeners for the buttons
+newGame_button.addEventListener("click", function() {
   startNewGame();
+});
 
-  newGame_button.addEventListener("click", function() {
-    startNewGame();
-  });
-
-  optionRock_img.addEventListener("click", function() {
+optionRock_img.addEventListener("click", function() {
+  if (isGamePlaying) {
     game("rock");
-  });
+  }
+});
 
-  optionPaper_img.addEventListener("click", function() {
+optionPaper_img.addEventListener("click", function() {
+  if (isGamePlaying) {
     game("paper");
-  });
+  }
+});
 
-  optionScissors_img.addEventListener("click", function() {
+optionScissors_img.addEventListener("click", function() {
+  if (isGamePlaying) {
     game("scissors");
-  });
+  }
+});
+
+//Setup for a new game
+function startNewGame() {
+  playerScore = 0;
+  computerScore = 0;
+  roundNumber = 0;
+  isGamePlaying = true;
+
+  playerScore_h2.innerHTML = playerScore;
+  computerScore_h2.innerHTML = computerScore;
+  roundNumber_span.innerHTML = roundNumber;
+  roundResult_h3.innerHTML = "";
+
+  playerChoice_img.src = "";
+  computerChoice_img.src = "";
+
+  optionRock_img.classList.remove("inactive");
+  optionRock_img.classList.add("active");
+  optionPaper_img.classList.remove("inactive");
+  optionPaper_img.classList.add("active");
+  optionScissors_img.classList.remove("inactive");
+  optionScissors_img.classList.add("active");
 }
 
 //Choose random item from possible options and return it as computer choice
@@ -80,8 +105,8 @@ function playerWins(player, computer) {
   playerScore++;
   playerScore_h2.innerHTML = playerScore;
 
-  updateRound();
   roundResult_h3.innerHTML = player + " beats " + computer + "!";
+  updateRound();
 }
 
 //If computer wins a round, update his score, update round number and display round result
@@ -89,14 +114,14 @@ function playerLoses(player, computer) {
   computerScore++;
   computerScore_h2.innerHTML = computerScore;
 
-  updateRound();
   roundResult_h3.innerHTML = computer + " beats " + player + "!";
+  updateRound();
 }
 
 //If it's a draw, no one gets a point, round number is updated and round result displayed
 function draw() {
-  updateRound();
   roundResult_h3.innerHTML = "It's a draw!";
+  updateRound();
 }
 
 //To update round number
@@ -104,27 +129,16 @@ function updateRound() {
   roundNumber++;
   roundNumber_span.innerHTML = roundNumber;
   if (roundNumber >= 10) {
+    roundResult_h3.innerHTML = "Game over!";
     isGamePlaying = false;
-    console.log(isGamePlaying);
+
+    optionRock_img.classList.remove("active");
+    optionRock_img.classList.add("inactive");
+    optionPaper_img.classList.remove("active");
+    optionPaper_img.classList.add("inactive");
+    optionScissors_img.classList.remove("active");
+    optionScissors_img.classList.add("inactive");
   }
 }
 
-function startNewGame() {
-  playerScore = 0;
-  computerScore = 0;
-  roundNumber = 0;
-
-  playerScore_h2.innerHTML = playerScore;
-  computerScore_h2.innerHTML = computerScore;
-  roundNumber_span.innerHTML = roundNumber;
-  roundResult_h3.innerHTML = "";
-
-  playerChoice_img.src = "";
-  computerChoice_img.src = "";
-}
-
-init();
-
-//TO DO
-//1. Game over
-//create a gamePlaying bool; when starting a new game, set it to true, add event listeners to buttons, reset scores and rounds values, clear computer and player choice images; when the game reaches a 10th round, change bool to false and remove event listeners, display game over;
+startNewGame();

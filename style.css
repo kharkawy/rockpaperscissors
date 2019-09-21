@@ -125,13 +125,26 @@ body {
 .player-options {
   margin: 50px 0 0 0;
 }
+
 .option {
   width: 50px;
   margin: 0 20px;
+}
+
+.active {
   cursor: pointer;
   transition-duration: 0.1s;
 }
 
-.option:hover {
+.active:hover {
   transform: scale(1.1);
+}
+
+.inactive {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.inactive:hover {
+  transform: none;
 }
