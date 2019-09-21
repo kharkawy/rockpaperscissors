@@ -3,6 +3,7 @@ var computerScore;
 var roundNumber;
 var isGamePlaying;
 
+// change to camelCase, const&let
 var playerScore_h2 = document.getElementById("player-score");
 var computerScore_h2 = document.getElementById("computer-score");
 
@@ -18,11 +19,12 @@ var roundResult_h3 = document.getElementById("round-result");
 
 var newGame_button = document.getElementById("new-game-btn");
 
-//Create event listeners for the buttons
+// event listeners for the buttons
 newGame_button.addEventListener("click", function() {
   startNewGame();
 });
 
+// change name from game to selectGesture
 optionRock_img.addEventListener("click", function() {
   if (isGamePlaying) {
     game("rock");
@@ -56,11 +58,9 @@ function startNewGame() {
   playerChoice_img.src = "";
   computerChoice_img.src = "";
 
-  optionRock_img.classList.remove("inactive");
+  // change classes to have only one, active
   optionRock_img.classList.add("active");
-  optionPaper_img.classList.remove("inactive");
   optionPaper_img.classList.add("active");
-  optionScissors_img.classList.remove("inactive");
   optionScissors_img.classList.add("active");
 }
 
@@ -133,11 +133,8 @@ function updateRound() {
     isGamePlaying = false;
 
     optionRock_img.classList.remove("active");
-    optionRock_img.classList.add("inactive");
     optionPaper_img.classList.remove("active");
-    optionPaper_img.classList.add("inactive");
     optionScissors_img.classList.remove("active");
-    optionScissors_img.classList.add("inactive");
   }
 }
 

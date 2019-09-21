@@ -129,22 +129,15 @@ body {
 .option {
   width: 50px;
   margin: 0 20px;
+  opacity: 0.5;
 }
 
 .active {
   cursor: pointer;
+  opacity: 1;
   transition-duration: 0.1s;
 }
 
 .active:hover {
   transform: scale(1.1);
-}
-
-.inactive {
-  cursor: default;
-  opacity: 0.5;
-}
-
-.inactive:hover {
-  transform: none;
 }
