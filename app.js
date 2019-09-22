@@ -3,68 +3,62 @@ var computerScore;
 var roundNumber;
 var isGamePlaying;
 
-// change to camelCase, const&let
-var playerScore_h2 = document.getElementById("player-score");
-var computerScore_h2 = document.getElementById("computer-score");
+const playerScoreH2 = document.getElementById("player-score");
+const computerScoreH2 = document.getElementById("computer-score");
 
-var playerChoice_img = document.getElementById("player-choice");
-var computerChoice_img = document.getElementById("computer-choice");
+const playerChoiceImg = document.getElementById("player-choice");
+const computerChoiceImg = document.getElementById("computer-choice");
 
-var optionRock_img = document.getElementById("rock");
-var optionPaper_img = document.getElementById("paper");
-var optionScissors_img = document.getElementById("scissors");
+const optionRockImg = document.getElementById("rock");
+const optionPaperImg = document.getElementById("paper");
+const optionScissorsImg = document.getElementById("scissors");
 
-var roundNumber_span = document.getElementById("round-number");
-var roundResult_h3 = document.getElementById("round-result");
+const roundNumberSpan = document.getElementById("round-number");
+const roundResultH3 = document.getElementById("round-result");
 
-var newGame_button = document.getElementById("new-game-btn");
+const newGameButton = document.getElementById("new-game-btn");
 
-// event listeners for the buttons
-newGame_button.addEventListener("click", function() {
+newGameButton.addEventListener("click", function() {
   startNewGame();
 });
 
-// change name from game to selectGesture
-optionRock_img.addEventListener("click", function() {
+optionRockImg.addEventListener("click", function() {
   if (isGamePlaying) {
-    game("rock");
+    selectGesture("rock");
   }
 });
 
-optionPaper_img.addEventListener("click", function() {
+optionPaperImg.addEventListener("click", function() {
   if (isGamePlaying) {
-    game("paper");
+    selectGesture("paper");
   }
 });
 
-optionScissors_img.addEventListener("click", function() {
+optionScissorsImg.addEventListener("click", function() {
   if (isGamePlaying) {
-    game("scissors");
+    selectGesture("scissors");
   }
 });
 
-//Setup for a new game
 function startNewGame() {
   playerScore = 0;
   computerScore = 0;
   roundNumber = 0;
   isGamePlaying = true;
 
-  playerScore_h2.innerHTML = playerScore;
-  computerScore_h2.innerHTML = computerScore;
-  roundNumber_span.innerHTML = roundNumber;
-  roundResult_h3.innerHTML = "";
+  playerScoreH2.innerHTML = playerScore;
+  computerScoreH2.innerHTML = computerScore;
+  roundNumberSpan.innerHTML = roundNumber;
+  roundResultH3.innerHTML = "";
 
-  playerChoice_img.src = "";
-  computerChoice_img.src = "";
+  playerChoiceImg.src = "";
+  computerChoiceImg.src = "";
 
-  // change classes to have only one, active
-  optionRock_img.classList.add("active");
-  optionPaper_img.classList.add("active");
-  optionScissors_img.classList.add("active");
+  optionRockImg.classList.add("active");
+  optionPaperImg.classList.add("active");
+  optionScissorsImg.classList.add("active");
 }
 
-//Choose random item from possible options and return it as computer choice
 function computerChoice() {
   var options = ["rock", "paper", "scissors"];
   var randomNumber = Math.floor(Math.random() * 3);
@@ -72,12 +66,11 @@ function computerChoice() {
   return options[randomNumber];
 }
 
-//Display both player and computer choices, compare them and decide on the score
-function game(playerChoiceValue) {
+function selectGesture(playerChoiceValue) {
   var computerChoiceValue = computerChoice();
 
-  playerChoice_img.src = "img/" + playerChoiceValue + ".svg";
-  computerChoice_img.src = "img/" + computerChoiceValue + ".svg";
+  playerChoiceImg.src = "img/" + playerChoiceValue + ".svg";
+  computerChoiceImg.src = "img/" + computerChoiceValue + ".svg";
 
   switch (playerChoiceValue + " " + computerChoiceValue) {
     case "rock scissors":
@@ -100,41 +93,37 @@ function game(playerChoiceValue) {
   }
 }
 
-//If player wins a round, update his score, update round number and display round result
 function playerWins(player, computer) {
   playerScore++;
-  playerScore_h2.innerHTML = playerScore;
+  playerScoreH2.innerHTML = playerScore;
 
-  roundResult_h3.innerHTML = player + " beats " + computer + "!";
+  roundResultH3.innerHTML = player + " beats " + computer + "!";
   updateRound();
 }
 
-//If computer wins a round, update his score, update round number and display round result
 function playerLoses(player, computer) {
   computerScore++;
-  computerScore_h2.innerHTML = computerScore;
+  computerScoreH2.innerHTML = computerScore;
 
-  roundResult_h3.innerHTML = computer + " beats " + player + "!";
+  roundResultH3.innerHTML = computer + " beats " + player + "!";
   updateRound();
 }
 
-//If it's a draw, no one gets a point, round number is updated and round result displayed
 function draw() {
-  roundResult_h3.innerHTML = "It's a draw!";
+  roundResultH3.innerHTML = "It's a draw!";
   updateRound();
 }
 
-//To update round number
 function updateRound() {
   roundNumber++;
-  roundNumber_span.innerHTML = roundNumber;
+  roundNumberSpan.innerHTML = roundNumber;
   if (roundNumber >= 10) {
-    roundResult_h3.innerHTML = "Game over!";
+    roundResultH3.innerHTML = "Game over!";
     isGamePlaying = false;
 
-    optionRock_img.classList.remove("active");
-    optionPaper_img.classList.remove("active");
-    optionScissors_img.classList.remove("active");
+    optionRockImg.classList.remove("active");
+    optionPaperImg.classList.remove("active");
+    optionScissorsImg.classList.remove("active");
   }
 }
 
